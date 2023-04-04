@@ -1,6 +1,7 @@
 package com.example.ECommerce.controllers;
 
 import com.example.ECommerce.dtos.LoginAttempt;
+import com.example.ECommerce.dtos.RegisterAttempt;
 import com.example.ECommerce.exceptions.IncorrectLoginRequest;
 import com.example.ECommerce.models.ECommerceProduct;
 import com.example.ECommerce.models.ECommerceUser;
@@ -42,8 +43,9 @@ public class ECommerceController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<ECommerceUser> register(@RequestBody LoginAttempt loginAttempt){
-        ECommerceUser eUser = new ECommerceUser(loginAttempt.getUsername(), loginAttempt.getPassword());
+    public ResponseEntity<ECommerceUser> register(@RequestBody RegisterAttempt registerAttempt){
+        System.out.println("\n Recieved register request \n");
+        ECommerceUser eUser = new ECommerceUser(registerAttempt.getEmail(), registerAttempt.getFirstName(), registerAttempt.getLastName(), registerAttempt.getUsername(), registerAttempt.getPassword());
         return ResponseEntity.status(HttpStatus.CREATED).body(eCommerceService.save(eUser));
     }
 

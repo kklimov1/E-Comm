@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -9,18 +10,22 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent {
   registerForm = new UntypedFormGroup({
+    email: new UntypedFormControl(''),
     fname: new UntypedFormControl(''),
     lname: new UntypedFormControl(''),
-    email: new UntypedFormControl(''),
+    username: new UntypedFormControl(''),
     password: new UntypedFormControl('')
   })
 
-  constructor( private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
   
   onSubmit(): void {
-    
+    this.authService.register(this.registerForm.get('email')?.value, this.registerForm.get('fname')?.value, this.registerForm.get('lname')?.value, this.registerForm.get('username')?.value, this.registerForm.get('password')?.value).subscribe( () => console.log("Registered user"),
+    (err) => alert(err),
+    () => this.router.navigate(['login'])
+    );
   }
 }

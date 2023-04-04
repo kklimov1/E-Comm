@@ -41,8 +41,8 @@ public class UserServiceTest {
 
     @Test
     public void testNewUserRegistration() throws UsernameTakenException {
-        ECommerceUser register = new ECommerceUser("myUsername", "myPassword");
-        ECommerceUser returneValue = new ECommerceUser(1, "myUsername", "myPassword");
+        ECommerceUser register = new ECommerceUser("myMail@mail.com", "myFirstName", "myLastName","myUsername", "myPassword");
+        ECommerceUser returneValue = new ECommerceUser(1,"myMail@mail.com", "myFirstName", "myLastName", "myUsername", "myPassword");
 
         Mockito.when(userRepositoryMock.save(register)).thenReturn(returneValue);
 
@@ -54,9 +54,12 @@ public class UserServiceTest {
 
     @Test
     public void testValidCredentials() throws IncorrectLoginRequest {
+        String email = "mail@m.com";
+        String firstName = "a";
+        String lastName = "a";
         String username = "username";
         String password = "password";
-        ECommerceUser returnUser = new ECommerceUser(1, username, password);
+        ECommerceUser returnUser = new ECommerceUser(1,email, firstName,lastName, username, password);
         Mockito.when(userRepositoryMock.findByUsernameAndPassword(username, password)).thenReturn(Optional.of(returnUser));
         Optional<ECommerceUser> out = userRepositoryMock.findByUsernameAndPassword(username, password);
         Assertions.assertEquals(Optional.of(returnUser), out);
@@ -66,7 +69,7 @@ public class UserServiceTest {
     public void testInvalidCredentials() {
         String username = "username";
         String password = "wrongPassword";
-        ECommerceUser eUser = new ECommerceUser(username, password);
+        ECommerceUser eUser = new ECommerceUser("mail.com", "firstName", "lastName", username, password);
         //Mockito.when(userRepositoryMock.findByUsernameAndPassword(username, password)).thenReturn(Optional.of(eUser));
         IncorrectLoginRequest E = Assertions.assertThrows(IncorrectLoginRequest.class, ()->{userService.getUser(username, password);});
         Assertions.assertEquals("Username does not exist in the database", E.getMessage());
