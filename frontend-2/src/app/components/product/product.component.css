@@ -1,0 +1,16 @@
+.productImg
+{
+    padding-top: 5%;
+    padding-left: 5%;
+}
+
+.cart
+{
+    padding-left: 4%;
+    font-size: 8x;
+    border-radius: 11px;
+}
+.cart:hover {
+    background-color: #4CAF50;
+    color: white;
+}
