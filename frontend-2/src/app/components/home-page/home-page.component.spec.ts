@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ProductListsComponent } from '../product-lists/product-lists.component';
 import { HomePageComponent } from './home-page.component';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('HomePageComponent', () => {
   let component: HomePageComponent;
@@ -8,7 +9,8 @@ describe('HomePageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HomePageComponent ]
+      imports: [ HttpClientModule],
+      declarations: [ HomePageComponent, ProductListsComponent ]
     })
     .compileComponents();
 
