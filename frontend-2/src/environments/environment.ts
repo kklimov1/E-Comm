@@ -1,11 +1,11 @@
 export const environment = {
     production: true,
     withCredentials: true,
-    baseUrl: "http://ec2-54-87-34-154.compute-1.amazonaws.com:8080",
+    baseUrl: "http://ec2-54-87-34-154.compute-1.amazonaws.com:7777",
     headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': 'http://statichostingmysite.s3-website-us-east-1.amazonaws.com',
-        'Origin': 'http://ec2-54-87-34-154.compute-1.amazonaws.com:8080',
+        'Origin': 'http://ec2-54-87-34-154.compute-1.amazonaws.com:7777',
         'Access-Control-Allow-Headers': 'Content-Type, X-Requested-With'
       }
 };
